@@ -20,9 +20,9 @@ export default function ForgotPassword(props: any) {
           source={require('../../assets/images/forgotpassword.png')}
           style={{
             width: wp(80),
-            height: hp(50),
+            height: hp(45),
             alignSelf: 'center',
-            marginTop: hp(2),
+            marginTop: hp(6),
           }}
         />
         <Text
@@ -45,7 +45,7 @@ export default function ForgotPassword(props: any) {
           style={{
             fontSize: wp(4),
             fontWeight: '400',
-            marginTop: hp(4),
+            marginTop: hp(6),
             marginLeft: wp(10.5),
           }}>
           Email Address
@@ -53,13 +53,13 @@ export default function ForgotPassword(props: any) {
 
         <TouchableOpacity
           style={{
-            width: wp(80),
-            height: hp(8),
+            width: wp(85),
+            height: hp(7.5),
             alignSelf: 'center',
             marginTop: wp(4),
             borderWidth: 0.5,
             flexDirection: 'row',
-            borderRadius: 8,
+            borderRadius: 12,
             alignItems: 'center',
             paddingHorizontal: wp(0),
           }}>

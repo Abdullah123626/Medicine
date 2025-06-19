@@ -27,14 +27,14 @@ export default function loginScreen(props: any) {
             width: wp(32),
             height: hp(15),
             alignSelf: 'center',
-            marginTop: hp(10),
+            marginTop: hp(8),
           }}
         />
 
         <View
           style={{
             width: wp(100),
-            height: hp(90),
+            height: hp(74.3),
             backgroundColor: '#FFFFFF',
             marginTop: hp(3),
             borderTopLeftRadius: 50,
@@ -44,9 +44,9 @@ export default function loginScreen(props: any) {
           <Text
             style={{
               alignSelf: 'center',
-              fontWeight: '600',
+              fontWeight: '700',
               fontSize: wp(5),
-              marginTop: hp(3),
+              marginTop: hp(4),
             }}>
             Get Back To Account
           </Text>
@@ -55,7 +55,7 @@ export default function loginScreen(props: any) {
             style={{
               fontSize: wp(4),
               fontWeight: '400',
-              marginTop: hp(3),
+              marginTop: hp(4),
               marginLeft: wp(10.5),
             }}>
             Email Address
@@ -101,7 +101,7 @@ export default function loginScreen(props: any) {
             style={{
               fontSize: wp(4),
               fontWeight: '400',
-              marginTop: hp(2),
+              marginTop: hp(2.5),
               marginLeft: wp(10.5),
             }}>
             Password
@@ -207,11 +207,11 @@ export default function loginScreen(props: any) {
               alignSelf: 'center',
               marginTop: hp(4),
             }}>
-            <Text style={{fontSize: wp(4)}}>Are you a new member?</Text>
+            <Text style={{fontSize: wp(4.5)}}>Are you a new member?</Text>
             <TouchableOpacity onPress={() => navigation.navigate('signUp')}>
               <Text
                 style={{
-                  fontSize: wp(4),
+                  fontSize: wp(4.5),
                   marginLeft: wp(1),
                   color: '#9D0DC5',
                   fontWeight: '500',
@@ -230,9 +230,9 @@ export default function loginScreen(props: any) {
             }}>
             <View
               style={{
-                height: 1,
-                backgroundColor: 'black',
                 width: wp(25),
+                borderWidth:0.2,
+                height:0.5
               }}
             />
             <Text style={{fontSize: wp(4), marginHorizontal: 10}}>
@@ -240,9 +240,10 @@ export default function loginScreen(props: any) {
             </Text>
             <View
               style={{
-                height: 1,
-                backgroundColor: 'black',
+                
                 width: wp(25),
+                borderWidth:0.2,
+                height:0.5
               }}
             />
           </View>
@@ -251,26 +252,31 @@ export default function loginScreen(props: any) {
             style={{
               flexDirection: 'row',
               alignSelf: 'center',
-              marginTop: wp(6),
+              marginTop: wp(5),
               gap: wp(5),
+              
             }}>
+              <TouchableOpacity>
             <Image
               source={require('../../assets/icons/google.png')}
               style={{
-                width: wp(12),
-                height: hp(6),
+                width: wp(11.4),
+                height: hp(5.5),
                 marginTop: wp(1),
               }}
             />
+            </TouchableOpacity>
+            <TouchableOpacity>
 
             <Image
               source={require('../../assets/icons/apple.png')}
               style={{
-                width: wp(10),
-                height: hp(6),
-                marginTop: wp(1),
+                width: wp(9.5),
+                height: hp(5.5),
+                marginTop: wp(0.3),
               }}
             />
+            </TouchableOpacity>
           </View>
         </View>
       </ScrollView>

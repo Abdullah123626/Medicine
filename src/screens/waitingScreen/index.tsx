@@ -27,10 +27,10 @@ export default function WaitingScreen({navigation}) {
       />
 
       <View style={{alignSelf: 'center', marginTop: hp(1)}}>
-        <Text style={{fontWeight: '600', fontSize: wp(4.3)}}>
+        <Text style={{fontWeight: '700', fontSize: wp(4.3)}}>
           Registering Account....
         </Text>
-        <Text style={{alignSelf: 'center', marginTop: hp(1)}}>
+        <Text style={{alignSelf: 'center', marginTop: hp(0.7),fontWeight:"500"}}>
           It may take few seconds
         </Text>
       </View>

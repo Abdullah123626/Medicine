@@ -62,13 +62,13 @@ export default function loginScreen(props: any) {
           </Text>
           <TouchableOpacity
             style={{
-              width: wp(80),
-              height: hp(8),
+              width: wp(85),
+              height: hp(7.5),
               alignSelf: 'center',
               marginTop: wp(4),
               borderWidth: 0.5,
               flexDirection: 'row',
-              borderRadius: 8,
+              borderRadius: 12,
             }}>
             <View
               style={{
@@ -108,13 +108,13 @@ export default function loginScreen(props: any) {
           </Text>
           <TouchableOpacity
             style={{
-              width: wp(80),
-              height: hp(8),
+              width: wp(85),
+              height: hp(7.5),
               alignSelf: 'center',
               marginTop: wp(4),
               borderWidth: 0.5,
               flexDirection: 'row',
-              borderRadius: 8,
+              borderRadius: 12,
               alignItems: 'center',
             }}>
             <View
@@ -156,13 +156,13 @@ export default function loginScreen(props: any) {
           </Text>
           <TouchableOpacity
             style={{
-              width: wp(80),
-              height: hp(8),
+              width: wp(85),
+              height: hp(7.5),
               alignSelf: 'center',
               marginTop: wp(4),
               borderWidth: 0.5,
               flexDirection: 'row',
-              borderRadius: 8,
+              borderRadius: 12,
             }}>
             <View
               style={{
@@ -202,13 +202,13 @@ export default function loginScreen(props: any) {
           </Text>
           <TouchableOpacity
             style={{
-              width: wp(80),
-              height: hp(8),
+              width: wp(85),
+              height: hp(7.5),
               alignSelf: 'center',
               marginTop: wp(4),
               borderWidth: 0.5,
               flexDirection: 'row',
-              borderRadius: 8,
+              borderRadius: 12,
             }}>
             <View
               style={{
@@ -242,7 +242,7 @@ export default function loginScreen(props: any) {
                 width: 1,
                 height: 45,
                 backgroundColor: 'grey',
-                marginTop: wp(2.5),
+                marginTop: wp(2),
                 marginLeft: wp(2),
               }}
             />
@@ -264,13 +264,13 @@ export default function loginScreen(props: any) {
           </Text>
           <TouchableOpacity
             style={{
-              width: wp(80),
-              height: hp(8),
+              width: wp(85),
+              height: hp(7.5),
               alignSelf: 'center',
               marginTop: wp(4),
               borderWidth: 0.5,
               flexDirection: 'row',
-              borderRadius: 8,
+              borderRadius: 12,
             }}>
             <View
               style={{
@@ -319,13 +319,13 @@ export default function loginScreen(props: any) {
           </Text>
           <TouchableOpacity
             style={{
-              width: wp(80),
-              height: hp(8),
+              width: wp(85),
+              height: hp(7.5),
               alignSelf: 'center',
               marginTop: wp(4),
               borderWidth: 0.5,
               flexDirection: 'row',
-              borderRadius: 8,
+              borderRadius: 12,
             }}>
             <View
               style={{
@@ -379,22 +379,24 @@ export default function loginScreen(props: any) {
               alignSelf: 'center',
               marginTop: hp(3.3),
             }}>
-            <TouchableOpacity
-              onPress={() => setIsSelected(!isSelected)}
-              style={{
-                width: wp(4),
-                height: hp(2),
-                borderWidth: 1,
-                marginTop: wp(1),
-                justifyContent: 'center',
-                alignItems: 'center',
-                borderColor: isSelected ? 'blue' : 'gray',
-                backgroundColor: isSelected ? '#e0f0ff' : 'white',
-              }}>
-              {isSelected && (
-                <Ionicons name="checkmark" size={hp(1.5)} color="blue" />
-              )}
-            </TouchableOpacity>
+          <TouchableOpacity
+        onPress={() => setIsSelected(!isSelected)}
+        style={{
+          width: wp(5),
+          height: wp(5),
+          borderWidth: 2,
+          justifyContent: 'center',
+          alignItems: 'center',
+          borderColor: isSelected ? 'blue' : 'gray',
+          backgroundColor: isSelected ? '#e0f0ff' : 'white',
+          borderRadius: 1,
+          borderBlockColor:"grey"
+          
+        }}>
+        {isSelected && (
+          <Ionicons name="checkmark" size={hp(1.5)} color="blue" />
+        )}
+      </TouchableOpacity>
             <View style={{ width: wp(70), height: hp(8), marginLeft: wp(4) }}>
               <Text>
                 I agree with{' '}
@@ -421,7 +423,7 @@ export default function loginScreen(props: any) {
               width: wp(85),
               height: hp(7.5),
               alignSelf: 'center',
-              marginTop: hp(1.5),
+              marginTop: hp(1),
               backgroundColor: '#9D0DC5',
               borderRadius: 12,
               justifyContent: 'center',
@@ -440,12 +442,12 @@ export default function loginScreen(props: any) {
               }}>
               <Text
                 style={{
-                  fontSize: wp(5.5),
+                  fontSize: wp(5),
                   fontWeight: '600',
                   alignSelf: 'center',
                   color: '#FFFFFF',
                 }}>
-                Login
+                Sign Up
               </Text>
             </LinearGradient>
           </TouchableOpacity>
@@ -457,13 +459,13 @@ export default function loginScreen(props: any) {
               marginTop: hp(4),
               alignSelf: 'center',
             }}>
-            <Text style={{ fontSize: wp(4) }}>Already have an account ?</Text>
+            <Text style={{ fontSize: wp(4),fontWeight:"500" }}>Already have account ?</Text>
             <TouchableOpacity
               onPress={() => navigation.navigate('loginScreen')}>
               <Text
                 style={{
                   fontSize: wp(4),
-                  fontWeight: '500',
+                  fontWeight: '600',
                   marginLeft: wp(0.7),
                   color: '#9D0DC5',
                 }}>

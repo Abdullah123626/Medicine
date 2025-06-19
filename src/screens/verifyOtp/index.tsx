@@ -14,6 +14,7 @@ import LinearGradient from 'react-native-linear-gradient';
 export default function VerifyOtp(props: any) {
   const {navigation} = props;
   const [otp, setOtp] = useState(['', '', '', '', '', '']);
+  const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
   const [modalVisible, setModalVisible] = useState(false);
   const inputs = useRef([]);
 
@@ -40,7 +41,8 @@ export default function VerifyOtp(props: any) {
   };
 
   return (
-    <ScrollView contentContainerStyle={{flexGrow: 1}}>
+    <ScrollView
+      contentContainerStyle={{flexGrow: 1, backgroundColor: '#FFFFFF'}}>
       <View style={{flex: 1, paddingHorizontal: wp(3)}}>
         <Image
           source={require('../../assets/images/otp.png')}
@@ -48,7 +50,7 @@ export default function VerifyOtp(props: any) {
             width: wp(80),
             height: hp(40),
             alignSelf: 'center',
-            marginTop: hp(8),
+            marginTop: hp(9),
           }}
         />
         <Text
@@ -65,14 +67,15 @@ export default function VerifyOtp(props: any) {
         </Text>
         <Text
           style={{
+            fontWeight: 'bold',
+            textDecorationLine: 'underline',
             alignSelf: 'center',
-            fontSize: wp(4),
-            fontWeight: '600',
-            marginTop: wp(1),
+            marginTop: wp(2),
           }}>
           muhammadsal2@gmail.com
         </Text>
 
+        {/* OTP Input Boxes */}
         <View
           style={{
             flexDirection: 'row',
@@ -89,15 +92,20 @@ export default function VerifyOtp(props: any) {
               value={digit}
               onChangeText={text => handleChange(text, index)}
               onKeyPress={e => handleKeyPress(e, index)}
+              onFocus={() => setFocusedIndex(index)}
+              onBlur={() => setFocusedIndex(null)}
               style={{
                 width: wp(12),
                 height: wp(15),
-                borderWidth: 1,
-                borderColor: '#ccc',
                 borderRadius: wp(2),
                 textAlign: 'center',
                 fontSize: wp(5),
                 fontWeight: '600',
+                backgroundColor: focusedIndex === index ? 'white' : '#eee',
+                borderWidth: 1,
+                borderColor: '#ccc',
+                 // Always grey border
+                 marginTop:wp(1.3)
               }}
             />
           ))}
@@ -108,11 +116,10 @@ export default function VerifyOtp(props: any) {
           onPress={() => setModalVisible(true)}
           style={{
             width: wp(85),
-            height: hp(8),
+            height: hp(7.5),
             alignSelf: 'center',
             borderRadius: 12,
-            backgroundColor: '#9D0DC5',
-            marginTop: hp(13),
+            marginTop: hp(11),
             justifyContent: 'center',
           }}>
           <LinearGradient
@@ -160,161 +167,156 @@ export default function VerifyOtp(props: any) {
                   fontWeight: '700',
                   marginBottom: wp(3),
                   alignSelf: 'center',
-                  marginTop:wp(3)
+                  marginTop: wp(3),
                 }}>
                 Set New Password
               </Text>
-              
-                <Text
-                        style={{
-                          fontSize: wp(4),
-                          fontWeight: '400',
-                          marginTop: hp(2),
-                          marginLeft: wp(4),
-                        }}>
-                        Password
-                      </Text>
-              
-                      <TouchableOpacity
-                        style={{
-                          width: wp(70),
-                          height: hp(8),
-                          alignSelf: 'center',
-                          marginTop: wp(4),
-                          borderWidth: 0.5,
-                          flexDirection: 'row',
-                          borderRadius: 8,
-                        }}>
-                        <View
-                          style={{
-                            width: 45,
-                            height: 47,
-                            backgroundColor: 'pink',
-                            alignSelf: 'center',
-                            borderRadius: 13,
-                            marginLeft: wp(2),
-                          }}>
-                          <Image
-                            source={require('../../assets/icons/lock.png')}
-                            style={{
-                              width: wp(4.4),
-                              height: hp(2.5),
-                              alignSelf: 'center',
-                              marginTop: wp(3.1),
-                            }}
-                          />
-                        </View>
-              
-                        <TextInput
-                          placeholder="***************"
-                          secureTextEntry
-                          style={{marginLeft: wp(2.3), flex: 1}}
-                        />
-              
-                        <Image
-                          source={require('../../assets/images/eye.png')}
-                          style={{
-                            width: wp(6),
-                            height: hp(3),
-                            marginRight: wp(4),
-                            alignSelf: 'center',
-                          }}
-                        />
-                      </TouchableOpacity>
-              
-                      <TouchableOpacity></TouchableOpacity>
 
+              {/* Password Field */}
+              <Text
+                style={{
+                  fontSize: wp(4),
+                  fontWeight: '400',
+                  marginTop: hp(2),
+                  marginLeft: wp(4),
+                }}>
+                Password
+              </Text>
 
+              <TouchableOpacity
+                style={{
+                  width: wp(70),
+                  height: hp(7.5),
+                  alignSelf: 'center',
+                  marginTop: wp(4),
+                  borderWidth: 0.5,
+                  flexDirection: 'row',
+                  borderRadius: 12,
+                }}>
+                <View
+                  style={{
+                    width: 45,
+                    height: 47,
+                    backgroundColor: 'pink',
+                    alignSelf: 'center',
+                    borderRadius: 13,
+                    marginLeft: wp(2),
+                  }}>
+                  <Image
+                    source={require('../../assets/icons/lock.png')}
+                    style={{
+                      width: wp(4.4),
+                      height: hp(2.5),
+                      alignSelf: 'center',
+                      marginTop: wp(3.1),
+                    }}
+                  />
+                </View>
 
-                        <Text
-                        style={{
-                          fontSize: wp(4),
-                          fontWeight: '400',
-                          marginTop: hp(5),
-                          marginLeft: wp(4),
-                        }}>
-                       Confirm Password
-                      </Text>
-              
-                      <TouchableOpacity
-                        style={{
-                          width: wp(70),
-                          height: hp(8),
-                          alignSelf: 'center',
-                          marginTop: wp(4),
-                          borderWidth: 0.5,
-                          flexDirection: 'row',
-                          borderRadius: 8,
-                        }}>
-                        <View
-                          style={{
-                            width: 45,
-                            height: 47,
-                            backgroundColor: 'pink',
-                            alignSelf: 'center',
-                            borderRadius: 13,
-                            marginLeft: wp(2),
-                          }}>
-                          <Image
-                            source={require('../../assets/icons/lock.png')}
-                            style={{
-                              width: wp(4.4),
-                              height: hp(2.5),
-                              alignSelf: 'center',
-                              marginTop: wp(3.1),
-                            }}
-                          />
-                        </View>
-              
-                        <TextInput
-                          placeholder="***************"
-                          secureTextEntry
-                          style={{marginLeft: wp(2.3), flex: 1}}
-                        />
-              
-                        <Image
-                          source={require('../../assets/images/eye.png')}
-                          style={{
-                            width: wp(6),
-                            height: hp(3),
-                            marginRight: wp(4),
-                            alignSelf: 'center',
-                          }}
-                        />
-                      </TouchableOpacity>
-              
-                      <TouchableOpacity></TouchableOpacity>
+                <TextInput
+                  placeholder="***************"
+                  secureTextEntry
+                  style={{marginLeft: wp(2.3), flex: 1}}
+                />
 
+                <Image
+                  source={require('../../assets/images/eye.png')}
+                  style={{
+                    width: wp(6),
+                    height: hp(3),
+                    marginRight: wp(4),
+                    alignSelf: 'center',
+                  }}
+                />
+              </TouchableOpacity>
 
-                      
+              {/* Confirm Password Field */}
+              <Text
+                style={{
+                  fontSize: wp(4),
+                  fontWeight: '400',
+                  marginTop: hp(4.3),
+                  marginLeft: wp(4),
+                }}>
+                Confirm Password
+              </Text>
 
+              <TouchableOpacity
+                style={{
+                  width: wp(70),
+                  height: hp(7.5),
+                  alignSelf: 'center',
+                  marginTop: wp(4),
+                  borderWidth: 0.5,
+                  flexDirection: 'row',
+                  borderRadius: 12,
+                }}>
+                <View
+                  style={{
+                    width: 45,
+                    height: 47,
+                    backgroundColor: 'pink',
+                    alignSelf: 'center',
+                    borderRadius: 13,
+                    marginLeft: wp(2),
+                  }}>
+                  <Image
+                    source={require('../../assets/icons/lock.png')}
+                    style={{
+                      width: wp(4.4),
+                      height: hp(2.5),
+                      alignSelf: 'center',
+                      marginTop: wp(3.1),
+                    }}
+                  />
+                </View>
 
+                <TextInput
+                  placeholder="***************"
+                  secureTextEntry
+                  style={{marginLeft: wp(2.3), flex: 1}}
+                />
 
+                <Image
+                  source={require('../../assets/images/eye.png')}
+                  style={{
+                    width: wp(6),
+                    height: hp(3),
+                    marginRight: wp(4),
+                    alignSelf: 'center',
+                  }}
+                />
+              </TouchableOpacity>
+
+              {/* Change Password Button */}
               <TouchableOpacity
                 onPress={() => {
                   setModalVisible(false);
-                  navigation.navigate('newScreen');
+                  navigation.navigate('BottomBar');
                 }}
                 style={{
-                  
-                  
-                  borderRadius: 10,
-                  marginTop:wp(10),
-                  width:wp(75),
-                  height:hp(8),
+                  borderRadius: 12,
+                  marginTop: wp(10),
+                  width: wp(70),
+                  height: hp(7.5),
                   justifyContent: 'center',
                 }}>
-
-                   <LinearGradient
-                              colors={['#E41BD8', '#9D0DC5']}
-                              style={{
-                                flex: 1,
-                                justifyContent: 'center',
-                                borderRadius: 12,
-                              }}>
-                <Text style={{color: '#fff', fontWeight: '600', fontSize: wp(4),alignSelf:"center"}}>
-                  Change Password
-                </Text>
+                <LinearGradient
+                  colors={['#E41BD8', '#9D0DC5']}
+                  style={{
+                    flex: 1,
+                    justifyContent: 'center',
+                    borderRadius: 12,
+                  }}>
+                  <Text
+                    style={{
+                      color: '#fff',
+                      fontWeight: '600',
+                      fontSize: wp(4),
+                      alignSelf: 'center',
+                    }}>
+                    Change Password
+                  </Text>
                 </LinearGradient>
               </TouchableOpacity>
             </View>
