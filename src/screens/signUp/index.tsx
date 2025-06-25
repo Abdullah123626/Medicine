@@ -461,7 +461,7 @@ export default function loginScreen(props: any) {
             }}>
             <Text style={{ fontSize: wp(4),fontWeight:"500" }}>Already have account ?</Text>
             <TouchableOpacity
-              onPress={() => navigation.navigate('loginScreen')}>
+              onPress={() => navigation.navigate('phoneSignin')}>
               <Text
                 style={{
                   fontSize: wp(4),

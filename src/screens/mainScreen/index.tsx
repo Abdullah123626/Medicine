@@ -3,11 +3,14 @@ import React from 'react';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import { hp, wp } from '../../enums/styleGuide';
 import LinearGradient from 'react-native-linear-gradient';
+import { useIsFocused } from '@react-navigation/native';
 
 export default function mainScreen({ navigation }) {
+  const isFocused = useIsFocused();
+
   return (
     <View style={{ flex: 1, backgroundColor: 'white' }}>
-      {/* Mosque Image at Top - behind */}
+      {/* Mosque Image at Top */}
       <View
         style={{
           position: 'absolute',
@@ -54,7 +57,7 @@ export default function mainScreen({ navigation }) {
         </View>
       </View>
 
-      {/* MapView overlaps mosque image */}
+      {/* MapView Area */}
       <View
         style={{
           position: 'absolute',
@@ -67,19 +70,72 @@ export default function mainScreen({ navigation }) {
           borderTopRightRadius: 30,
           overflow: 'hidden',
         }}>
-        <MapView
-          provider={PROVIDER_GOOGLE}
-          style={{ flex: 1 }}
-          region={{
-            latitude: 28.421226901206584,
-            longitude: 70.2974077627825,
-            latitudeDelta: 0.015,
-            longitudeDelta: 0.0121,
+        {isFocused && (
+          <MapView
+            provider={PROVIDER_GOOGLE}
+            style={{ flex: 1 }}
+            region={{
+              latitude: 28.421226901206584,
+              longitude: 70.2974077627825,
+              latitudeDelta: 0.015,
+              longitudeDelta: 0.0121,
+            }}
+          />
+        )}
+
+        {/* 📍 Location Icon */}
+        <TouchableOpacity
+          style={{
+            position: 'absolute',
+            top: hp(38),
+            alignSelf: 'center',
+            backgroundColor: '#9D0DC5',
+            width: wp(12),
+            height: wp(12),
+            borderRadius: wp(6),
+            justifyContent: 'center',
+            alignItems: 'center',
+            zIndex: 5,
           }}
-        />
+          onPress={() => alert('Location icon pressed')}>
+          <Image
+            source={require('../../assets/icons/locationns.png')}
+            style={{ width: wp(6), height: wp(6), tintColor: 'white' }}
+          />
+        </TouchableOpacity>
+
+        {/* Round Button */}
+        <TouchableOpacity
+          onPress={() => alert('Map button pressed')}
+          style={{
+            position: 'absolute',
+            top: hp(12),
+            left: wp(35),
+            width: wp(22),
+            height: wp(22),
+            borderRadius: wp(12.5),
+            justifyContent: 'center',
+            alignItems: 'center',
+            elevation: 60,
+            backgroundColor: 'rgba(213, 2, 255, 0.99)',
+            borderWidth: 30,
+            borderColor: 'rgba(100, 30, 97, 0.25)',
+          }}>
+          <LinearGradient
+            colors={['#E41BD8', '#9D0DC5']}
+            style={{
+              width: '100%',
+              height: '100%',
+              borderRadius: wp(11.5),
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            {/* Optional inner icon/text */}
+          </LinearGradient>
+        </TouchableOpacity>
       </View>
 
-      {/* Group Card Floating on Map */}
+      {/* Floating Group Card */}
       <View
         style={{
           position: 'absolute',

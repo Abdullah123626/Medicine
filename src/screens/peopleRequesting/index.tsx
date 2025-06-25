@@ -1,10 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text, Image, TouchableOpacity, Modal} from 'react-native';
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
+import {useIsFocused} from '@react-navigation/native';
 import {hp, wp} from '../../enums/styleGuide';
 import LinearGradient from 'react-native-linear-gradient';
 
 export default function peopleRequesting({navigation, route}) {
+  const isFocused = useIsFocused();
   const {selectedPrayer, selectedTime} = route.params || {};
   const [timeLeft, setTimeLeft] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
@@ -12,17 +14,14 @@ export default function peopleRequesting({navigation, route}) {
   useEffect(() => {
     const getTargetDate = () => {
       if (!selectedTime) return new Date();
-
       const [time, period] = selectedTime.split(' ');
       const [hourStr, minuteStr] = time.split(':');
       let hour = parseInt(hourStr);
       const minute = parseInt(minuteStr);
-
       if (period === 'PM' && hour !== 12) hour += 12;
       if (period === 'AM' && hour === 12) hour = 0;
-
       const now = new Date();
-      const target = new Date(
+      return new Date(
         now.getFullYear(),
         now.getMonth(),
         now.getDate(),
@@ -31,7 +30,6 @@ export default function peopleRequesting({navigation, route}) {
         0,
         0,
       );
-      return target;
     };
 
     const targetTime = getTargetDate();
@@ -94,16 +92,18 @@ export default function peopleRequesting({navigation, route}) {
           borderTopRightRadius: 30,
           overflow: 'hidden',
         }}>
-        <MapView
-          provider={PROVIDER_GOOGLE}
-          style={{flex: 1}}
-          region={{
-            latitude: 28.421226901206584,
-            longitude: 70.2974077627825,
-            latitudeDelta: 0.015,
-            longitudeDelta: 0.0121,
-          }}
-        />
+        {isFocused && (
+          <MapView
+            provider={PROVIDER_GOOGLE}
+            style={{flex: 1}}
+            region={{
+              latitude: 28.421226901206584,
+              longitude: 70.2974077627825,
+              latitudeDelta: 0.015,
+              longitudeDelta: 0.0121,
+            }}
+          />
+        )}
 
         {/* Countdown Timer */}
         <TouchableOpacity
@@ -112,8 +112,8 @@ export default function peopleRequesting({navigation, route}) {
             top: '7%',
             left: '50%',
             transform: [{translateX: -wp(15)}],
-            width: wp(30),
-            height: wp(30),
+            width: wp(24),
+            height: wp(24),
             borderRadius: 50,
             justifyContent: 'center',
             alignItems: 'center',
@@ -138,7 +138,7 @@ export default function peopleRequesting({navigation, route}) {
           </LinearGradient>
         </TouchableOpacity>
 
-        {/* Location Icon with 3 Black Contacts */}
+        {/* Location Icon with Purple Background Behind Icon */}
         <TouchableOpacity
           activeOpacity={0.9}
           style={{
@@ -148,7 +148,7 @@ export default function peopleRequesting({navigation, route}) {
             width: wp(48),
             height: wp(48),
             borderRadius: wp(23),
-            backgroundColor: 'rgba(241, 228, 241, 0.18)', // lighter background
+            backgroundColor: 'rgba(245, 90, 245, 0.18)',
             justifyContent: 'center',
             alignItems: 'center',
             shadowColor: '#000',
@@ -157,8 +157,7 @@ export default function peopleRequesting({navigation, route}) {
             shadowRadius: 2,
             elevation: 1,
           }}>
-          <LinearGradient
-            colors={['rgba(228, 27, 216, 0.15)', 'rgba(157, 13, 197, 0.1)']}
+          <View
             style={{
               width: '100%',
               height: '100%',
@@ -167,44 +166,60 @@ export default function peopleRequesting({navigation, route}) {
               alignItems: 'center',
               position: 'relative',
             }}>
+            {/* Purple Circle Behind Location Icon */}
+            <LinearGradient
+              colors={['#E41BD8', '#9D0DC5']}
+              style={{
+                width: wp(14),
+                height: wp(14),
+                borderRadius: wp(9),
+                justifyContent: 'center',
+                alignItems: 'center',
+                zIndex: 2,
+              }}>
+              <TouchableOpacity>
+                <Image
+                  source={require('../../assets/icons/locationns.png')}
+                  style={{width: wp(10), height: wp(10), tintColor: 'white'}}
+                />
+              </TouchableOpacity>
+            </LinearGradient>
+
+            {/* Contact Icons */}
             <Image
-              source={require('../../assets/icons/locationns.png')}
-              style={{width: wp(10), height: wp(10), tintColor: 'rgb(198, 9, 255)'}}
-            />
-            <Image
-              source={require('../../assets/icons/2contact.png')}
+              source={require('../../assets/icons/singlecontact.png')}
               style={{
                 position: 'absolute',
                 top: wp(6),
                 left: wp(12),
-                width: wp(6.5),
-                height: wp(6.5),
+                width: wp(9.5),
+                height: wp(7.5),
                 tintColor: 'black',
               }}
             />
             <Image
-              source={require('../../assets/icons/2contact.png')}
+              source={require('../../assets/icons/singlecontact.png')}
               style={{
                 position: 'absolute',
                 top: wp(15),
                 right: wp(2),
-                width: wp(6.5),
-                height: wp(6.5),
+                width: wp(9.5),
+                height: wp(7.5),
                 tintColor: 'black',
               }}
             />
             <Image
-              source={require('../../assets/icons/2contact.png')}
+              source={require('../../assets/icons/singlecontact.png')}
               style={{
                 position: 'absolute',
                 bottom: wp(5),
                 alignSelf: 'center',
-                width: wp(6.5),
-                height: wp(6.5),
+                width: wp(9.5),
+                height: wp(7.5),
                 tintColor: 'black',
               }}
             />
-          </LinearGradient>
+          </View>
         </TouchableOpacity>
       </View>
 
@@ -298,12 +313,10 @@ export default function peopleRequesting({navigation, route}) {
                 padding: wp(5),
                 alignItems: 'center',
               }}>
-              <View>
-                <Image
-                  source={require('../../assets/images/chandpurple.png')}
-                  style={{width: wp(55), height: wp(55), marginLeft: wp(15)}}
-                />
-              </View>
+              <Image
+                source={require('../../assets/images/chandpurple.png')}
+                style={{width: wp(55), height: wp(55), marginLeft: wp(15)}}
+              />
               <Text style={{fontSize: wp(5), fontWeight: '700'}}>
                 Are You Sure
               </Text>
@@ -314,7 +327,6 @@ export default function peopleRequesting({navigation, route}) {
                 </Text>
               </View>
 
-              {/* OK Button with Gradient */}
               <TouchableOpacity
                 onPress={() => setModalVisible(false)}
                 style={{marginTop: wp(7), alignSelf: 'center'}}>
@@ -338,7 +350,6 @@ export default function peopleRequesting({navigation, route}) {
                 </LinearGradient>
               </TouchableOpacity>
 
-              {/* Back Button */}
               <TouchableOpacity
                 onPress={() => setModalVisible(false)}
                 style={{

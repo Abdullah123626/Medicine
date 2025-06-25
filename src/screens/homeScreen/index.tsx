@@ -10,12 +10,14 @@ import {
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 import {hp, wp} from '../../enums/styleGuide';
 import LinearGradient from 'react-native-linear-gradient';
+import {useIsFocused} from '@react-navigation/native'; // 👈 added this
 
 export default function homeScreen({navigation}) {
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [selectedPrayer, setSelectedPrayer] = useState('Praying Fajr');
   const [selectedTime, setSelectedTime] = useState('04:00 AM');
   const [showErrorModal, setShowErrorModal] = useState(false);
+  const isFocused = useIsFocused(); // 👈 added this
 
   const toggleDropdown = type => {
     setActiveDropdown(prev => (prev === type ? null : type));
@@ -115,49 +117,48 @@ export default function homeScreen({navigation}) {
           borderTopRightRadius: 30,
           overflow: 'hidden',
         }}>
-        <MapView
-          provider={PROVIDER_GOOGLE}
-          style={{flex: 1}}
-          region={{
-            latitude: 28.421226901206584,
-            longitude: 70.2974077627825,
-            latitudeDelta: 0.015,
-            longitudeDelta: 0.0121,
-          }}
-        />
+        {isFocused && (
+          <MapView
+            provider={PROVIDER_GOOGLE}
+            style={{flex: 1}}
+            region={{
+              latitude: 28.421226901206584,
+              longitude: 70.2974077627825,
+              latitudeDelta: 0.015,
+              longitudeDelta: 0.0121,
+            }}
+          />
+        )}
 
-        {/* Gradient Button in Map */}
-      <TouchableOpacity
-  onPress={() => alert('Map button pressed')}
-  style={{
-    position: 'absolute',
-    top: hp(20),
-    left: wp(35),
-    width: wp(23),
-    height: wp(23),
-    borderRadius: wp(11.5), // 🟢 Half of 23 to make it fully round
-    justifyContent: 'center',
-    alignItems: 'center',
-    elevation: 20,
-    backgroundColor: 'rgba(228, 194, 228, 0.18)',
-    borderWidth: 16,
-    borderColor: 'rgba(100, 30, 97, 0.25)', // Light grayish border
-  }}>
-  <LinearGradient
-    colors={['#E41BD8', '#9D0DC5']}
-    style={{
-      width: '100%',
-      height: '100%',
-      borderRadius: wp(11.5), // 🟢 Also make inner view fully round
-      justifyContent: 'center',
-      alignItems: 'center',
-    }}>
-    {/* Inner content goes here */}
-  </LinearGradient>
-</TouchableOpacity>
-
-
-
+        {/* Round Button */}
+        <TouchableOpacity
+          onPress={() => alert('Map button pressed')}
+          style={{
+            position: 'absolute',
+            top: hp(14),
+            left: wp(35),
+            width: wp(22),
+            height: wp(22),
+            borderRadius: wp(12.5),
+            justifyContent: 'center',
+            alignItems: 'center',
+            elevation: 60,
+            backgroundColor: 'rgba(224, 7, 224, 0.18)',
+            borderWidth: 28,
+            borderColor: 'rgba(100, 30, 97, 0.25)',
+          }}>
+          <LinearGradient
+            colors={['#E41BD8', '#9D0DC5']}
+            style={{
+              width: '100%',
+              height: '100%',
+              borderRadius: wp(11.5),
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            {/* Optional inner icon/text */}
+          </LinearGradient>
+        </TouchableOpacity>
       </View>
 
       {/* Bottom Card */}
@@ -253,21 +254,28 @@ export default function homeScreen({navigation}) {
             <Text style={{fontSize: wp(5.5), fontWeight: '700'}}>Wrong prayer select</Text>
             <Text style={{marginTop: wp(5)}}>Please select prayer as its look like prayer</Text>
             <Text>time in your location.</Text>
+
             <TouchableOpacity
               onPress={() => setShowErrorModal(false)}
               style={{
                 marginTop: wp(9),
-                backgroundColor: '#E41BD8',
-                paddingVertical: 10,
-                paddingHorizontal: 20,
                 borderRadius: 12,
                 width: wp(70),
                 height: hp(6.5),
-                justifyContent: 'center',
+                overflow: 'hidden',
               }}>
-              <Text style={{color: '#fff', alignSelf: 'center', fontSize: wp(4), fontWeight: '700'}}>
-                Got It
-              </Text>
+              <LinearGradient
+                colors={['#E41BD8', '#9D0DC5']}
+                start={{x: 0, y: 0}}
+                end={{x: 1, y: 1}}
+                style={{
+                  flex: 1,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  borderRadius: 12,
+                }}>
+                <Text style={{color: '#fff', fontSize: wp(4), fontWeight: '700'}}>Got It</Text>
+              </LinearGradient>
             </TouchableOpacity>
           </View>
         </View>

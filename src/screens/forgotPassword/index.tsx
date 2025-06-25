@@ -85,13 +85,13 @@ export default function ForgotPassword(props: any) {
           </View>
           <TextInput
             placeholder="abc@gmail.com"
-            style={{flex: 1,marginLeft:wp(2)}}
+            style={{flex: 1, marginLeft: wp(2)}}
             keyboardType="email-address"
           />
         </TouchableOpacity>
 
         <TouchableOpacity
-          onPress={() => navigation.navigate('verifyOtp')}
+          onPress={() => navigation.navigate('googleLogin')}
           style={{
             width: wp(85),
             height: hp(8),

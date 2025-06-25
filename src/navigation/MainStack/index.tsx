@@ -18,6 +18,12 @@ import mainScreen from '../../screens/mainScreen';
 import newScreen from '../../screens/newScreen';
 import peopleRequesting from '../../screens/peopleRequesting';
 import groupChatRequest from '../../screens/groupChatRequest';
+import emailPassword from '../../screens/emailPassword';
+import loginMethod from '../../screens/loginMethod';
+import logOut from '../../screens/logOut';
+import googleLogin from '../../screens/googleLogin';
+import phoneSignin from '../../phoneSignin';
+import home from '../../screens/addCard/home';
 
 const Stack = createNativeStackNavigator();
 
@@ -29,7 +35,14 @@ export default function MainStack() {
         initialRouteName="firstScreen">
         <Stack.Screen name="firstScreen" component={firstScreen} />
         <Stack.Screen name="loginScreen" component={loginScreen} />
+        <Stack.Screen name="emailPassword" component={emailPassword} />
+        <Stack.Screen name="loginMethod" component={loginMethod} />
+        <Stack.Screen name="logOut" component={logOut} />
+        <Stack.Screen name="home" component={home} />
+
+        <Stack.Screen name="googleLogin" component={googleLogin} />
         <Stack.Screen name="signUp" component={signUp} />
+        <Stack.Screen name="phoneSignin" component={phoneSignin} />
         <Stack.Screen name="waitingScreen" component={waitingScreen} />
         <Stack.Screen name="forgotPassword" component={forgotPassword} />
         <Stack.Screen name="verifyOtp" component={verifyOtp} />

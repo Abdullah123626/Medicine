@@ -168,7 +168,7 @@ export default function loginScreen(props: any) {
 
           {/* Login Button with Gradient */}
           <TouchableOpacity
-            onPress={() => navigation.navigate('signUp')}
+            onPress={() => navigation.navigate('emailPassword')}
             style={{
               width: wp(85),
               height: hp(7.5),
@@ -208,7 +208,7 @@ export default function loginScreen(props: any) {
               marginTop: hp(4),
             }}>
             <Text style={{fontSize: wp(4.5)}}>Are you a new member?</Text>
-            <TouchableOpacity onPress={() => navigation.navigate('signUp')}>
+            <TouchableOpacity onPress={() => navigation.navigate('loginMethod')}>
               <Text
                 style={{
                   fontSize: wp(4.5),

@@ -3,10 +3,12 @@ import {View, Text, Image, TouchableOpacity} from 'react-native';
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 import {hp, wp} from '../../enums/styleGuide';
 import LinearGradient from 'react-native-linear-gradient';
+import {useIsFocused} from '@react-navigation/native'; // 👈 added
 
 export default function peopleRequesting({navigation, route}) {
   const [timeLeft, setTimeLeft] = useState('');
   const prayerTime = route?.params?.prayerTime || '16:00'; // default 4:00 PM
+  const isFocused = useIsFocused(); // 👈 used to re-render map on screen focus
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -44,7 +46,7 @@ export default function peopleRequesting({navigation, route}) {
 
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
-      {/* Header Over Map */}
+      {/* Back Button */}
       <View
         style={{
           position: 'absolute',
@@ -63,7 +65,7 @@ export default function peopleRequesting({navigation, route}) {
         </TouchableOpacity>
       </View>
 
-      {/* MapView */}
+      {/* MapView with focus fix */}
       <View
         style={{
           position: 'absolute',
@@ -76,138 +78,48 @@ export default function peopleRequesting({navigation, route}) {
           borderTopRightRadius: 30,
           overflow: 'hidden',
         }}>
-        <MapView
-          provider={PROVIDER_GOOGLE}
-          style={{flex: 1}}
-          region={{
-            latitude: 28.421226901206584,
-            longitude: 70.2974077627825,
-            latitudeDelta: 0.015,
-            longitudeDelta: 0.0121,
-          }}
-        />
+        {isFocused && (
+          <MapView
+            provider={PROVIDER_GOOGLE}
+            style={{flex: 1}}
+            region={{
+              latitude: 28.421226901206584,
+              longitude: 70.2974077627825,
+              latitudeDelta: 0.015,
+              longitudeDelta: 0.0121,
+            }}
+          />
+        )}
       </View>
 
       {/* Countdown Circle */}
       <TouchableOpacity
-  onPress={() => console.log('Pressed')}
-  style={{
-    position: 'absolute',
-    top: '20%',
-    left: '50%',
-    marginLeft: -50,
-    marginTop: -50,
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    backgroundColor: 'rgba(153, 3, 143, 0.97)',
-    justifyContent: 'center',
-    alignItems: 'center',
-    zIndex: 999,
+        onPress={() => console.log('Pressed')}
+        style={{
+          position: 'absolute',
+          top: '20%',
+          left: '50%',
+          marginLeft: -50,
+          marginTop: -50,
+          width: 100,
+          height: 100,
+          borderRadius: 50,
+          backgroundColor: 'rgba(153, 3, 143, 0.97)',
+          justifyContent: 'center',
+          alignItems: 'center',
+          zIndex: 999,
+          shadowColor: '#E41BD8',
+          shadowOffset: {width: 0, height: 0},
+          shadowOpacity: 0.6,
+          shadowRadius: 40,
+          elevation: 50,
+        }}>
+        <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}>
+          {timeLeft}
+        </Text>
+      </TouchableOpacity>
 
-    // iOS shadow - full circle glow
-    shadowColor: '#E41BD8',
-    shadowOffset: {width: 0, height: 0},
-    shadowOpacity: 0.6,
-    shadowRadius: 40,
-
-    // Android shadow (enhanced)
-    elevation: 50,
-  }}>
-  <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}>
-    {timeLeft}
-  </Text>
-</TouchableOpacity>
-<TouchableOpacity
-  onPress={() => console.log('Pressed')}
-  style={{
-    position: 'absolute',
-    top: '20%',
-    left: '50%',
-    marginLeft: -50,
-    marginTop: -50,
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    backgroundColor: 'rgba(153, 3, 143, 0.97)',
-    justifyContent: 'center',
-    alignItems: 'center',
-    zIndex: 999,
-
-    // iOS shadow - full circle glow
-    shadowColor: '#E41BD8',
-    shadowOffset: {width: 0, height: 0},
-    shadowOpacity: 0.6,
-    shadowRadius: 40,
-
-    // Android shadow (enhanced)
-    elevation: 50,
-  }}>
-  <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}>
-    {timeLeft}
-  </Text>
-</TouchableOpacity>
-<TouchableOpacity
-  onPress={() => console.log('Pressed')}
-  style={{
-    position: 'absolute',
-    top: '20%',
-    left: '50%',
-    marginLeft: -50,
-    marginTop: -50,
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    backgroundColor: 'rgba(153, 3, 143, 0.97)',
-    justifyContent: 'center',
-    alignItems: 'center',
-    zIndex: 999,
-
-    // iOS shadow - full circle glow
-    shadowColor: '#E41BD8',
-    shadowOffset: {width: 0, height: 0},
-    shadowOpacity: 0.6,
-    shadowRadius: 40,
-
-    // Android shadow (enhanced)
-    elevation: 50,
-  }}>
-  <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}>
-    {timeLeft}
-  </Text>
-</TouchableOpacity>
-<TouchableOpacity
-  onPress={() => console.log('Pressed')}
-  style={{
-    position: 'absolute',
-    top: '20%',
-    left: '50%',
-    marginLeft: -50,
-    marginTop: -50,
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    backgroundColor: 'rgba(153, 3, 143, 0.97)',
-    justifyContent: 'center',
-    alignItems: 'center',
-    zIndex: 999,
-
-    // iOS shadow - full circle glow
-    shadowColor: '#E41BD8',
-    shadowOffset: {width: 0, height: 0},
-    shadowOpacity: 0.6,
-    shadowRadius: 40,
-
-    // Android shadow (enhanced)
-    elevation: 50,
-  }}>
-  <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}>
-    {timeLeft}
-  </Text>
-</TouchableOpacity>
-
-
-      {/* Group Card Floating on Map */}
+      {/* Support Card */}
       <View
         style={{
           position: 'absolute',
@@ -224,15 +136,21 @@ export default function peopleRequesting({navigation, route}) {
           shadowOffset: {width: 0, height: 2},
           shadowRadius: 4,
           zIndex: 3,
-          height:hp(38),
-          marginTop:wp(5)
+          height: hp(38),
+          marginTop: wp(5),
         }}>
         <Text
-          style={{alignSelf: 'center', fontSize: wp(4.7), fontWeight: '800',marginTop:wp(3),color:'rgba(178, 9, 184, 0.85)'}}>
+          style={{
+            alignSelf: 'center',
+            fontSize: wp(4.7),
+            fontWeight: '800',
+            marginTop: wp(3),
+            color: 'rgba(178, 9, 184, 0.85)',
+          }}>
           Support Our App
         </Text>
         <View style={{alignSelf: 'center', marginTop: wp(5)}}>
-          <Text style={{fontSize: wp(3.5),fontWeight:"500"}}>
+          <Text style={{fontSize: wp(3.5), fontWeight: '500'}}>
             Please support our app by contributing,
           </Text>
           <Text
@@ -240,7 +158,7 @@ export default function peopleRequesting({navigation, route}) {
               alignSelf: 'center',
               fontSize: wp(3.5),
               marginTop: wp(1.3),
-              fontWeight:"500"
+              fontWeight: '500',
             }}>
             we don’t take Sadiqa, Fitra, Zakat,
           </Text>
@@ -249,7 +167,7 @@ export default function peopleRequesting({navigation, route}) {
               alignSelf: 'center',
               marginTop: wp(1.3),
               fontSize: wp(3.5),
-              fontWeight:"500"
+              fontWeight: '500',
             }}>
             donation charity we only take gift.
           </Text>
@@ -280,7 +198,6 @@ export default function peopleRequesting({navigation, route}) {
                 fontSize: wp(3.7),
                 fontWeight: '600',
                 alignSelf: 'center',
-                
               }}>
               Gift
             </Text>
@@ -301,9 +218,8 @@ export default function peopleRequesting({navigation, route}) {
           <Text
             style={{
               fontSize: wp(3.7),
-              marginTop: wp(0),
               alignSelf: 'center',
-              fontWeight:"600"
+              fontWeight: '600',
             }}>
             Skip
           </Text>

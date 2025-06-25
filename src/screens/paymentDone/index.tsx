@@ -3,9 +3,8 @@ import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { hp, wp } from '../../enums/styleGuide';
 import LinearGradient from 'react-native-linear-gradient';
 
-export default function paymentDone(props) {
-  const { navigation } = props;
-
+export default function paymentDone(props:any) {
+  const {navigation}=props
   return (
     <View style={{ flex: 1, backgroundColor: 'white' }}>
       {/* Tick Image */}
@@ -24,20 +23,47 @@ export default function paymentDone(props) {
         <Text style={{ fontSize: wp(5), fontWeight: '700' }}>
           Payment has been made
         </Text>
-        <Text style={{ fontSize: wp(5), fontWeight: '700', alignSelf: 'center',marginTop:wp(2) }}>
+        <Text
+          style={{
+            fontSize: wp(5),
+            fontWeight: '700',
+            alignSelf: 'center',
+            marginTop: wp(2),
+          }}>
           successfully.
         </Text>
       </View>
 
       {/* Description */}
-      <View style={{ marginTop: hp(4), alignSelf: 'center', width: wp(90), gap: 6 }}>
-        <Text style={{ fontSize: wp(4), alignSelf: 'center', fontWeight: '300' }}>
+      <View
+        style={{
+          marginTop: hp(4),
+          alignSelf: 'center',
+          width: wp(90),
+          gap: 6,
+        }}>
+        <Text
+          style={{
+            fontSize: wp(4),
+            alignSelf: 'center',
+            fontWeight: '300',
+          }}>
           Lorem ipsum dolor sit amet consectetur.
         </Text>
-        <Text style={{ fontSize: wp(4), alignSelf: 'center', fontWeight: '300' }}>
+        <Text
+          style={{
+            fontSize: wp(4),
+            alignSelf: 'center',
+            fontWeight: '300',
+          }}>
           Nam tincidunt rutrum imperdiet dictumst in.
         </Text>
-        <Text style={{ fontSize: wp(4), alignSelf: 'center', fontWeight: '300' }}>
+        <Text
+          style={{
+            fontSize: wp(4),
+            alignSelf: 'center',
+            fontWeight: '300',
+          }}>
           Id eget lacus id non.
         </Text>
       </View>
@@ -56,19 +82,24 @@ export default function paymentDone(props) {
           justifyContent: 'center',
         }}>
         <TouchableOpacity
-          onPress={() => navigation.navigate('Home', { screen: 'homeScreen' })}
+          onPress={() =>
+            navigation.navigate('Home', {
+              screen: 'homeScreen',
+            })
+          }
           style={{
             width: '100%',
             height: '100%',
             justifyContent: 'center',
             borderRadius: 15,
           }}>
-          <Text style={{
-            alignSelf: 'center',
-            color: '#FFFFFF',
-            fontWeight: '600',
-            fontSize: wp(4.5),
-          }}>
+          <Text
+            style={{
+              alignSelf: 'center',
+              color: '#FFFFFF',
+              fontWeight: '600',
+              fontSize: wp(4.5),
+            }}>
             Back to Home
           </Text>
         </TouchableOpacity>
